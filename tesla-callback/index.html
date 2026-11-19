@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Tesla-koppeling thuisdashboard</title>
+<style>body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:640px;margin:40px auto;padding:0 16px;
+background:#0f1420;color:#e8ecf3}textarea{width:100%;height:110px;font:14px monospace;border-radius:8px;padding:8px}
+button{font-size:18px;padding:10px 18px;border-radius:8px;border:0;background:#4f9cf9;color:#fff;margin-top:8px}
+.err{color:#ff7b72}</style></head><body>
+<h1>Tesla-koppeling</h1>
+<p id="msg">Kopieer de regel hieronder en plak hem in het setup-script op de Pi.</p>
+<textarea id="url" readonly></textarea><br><button id="copy">Kopieer</button>
+<p>Deze pagina stuurt niets door: de code staat alleen in je eigen browser en is zonder je client secret
+waardeloos. Hij verloopt na een paar minuten.</p>
+<script>
+var u = location.href, t = document.getElementById('url'); t.value = u;
+if (/[?&]error=/.test(u)) { document.getElementById('msg').className = 'err';
+  document.getElementById('msg').innerHTML = 'Tesla gaf een fout terug (zie hieronder). Probeer het opnieuw.'; }
+else if (!/[?&]code=/.test(u)) { document.getElementById('msg').innerHTML = 'Geen code gevonden in deze URL.'; }
+document.getElementById('copy').onclick = function () { t.select(); try { document.execCommand('copy');
+  this.innerHTML = 'Gekopieerd'; } catch (e) {} };
+</script></body></html>
